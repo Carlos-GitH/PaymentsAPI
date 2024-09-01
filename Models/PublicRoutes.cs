@@ -12,8 +12,9 @@ namespace PaymentsApi.Models
 
         public static bool IsPublicRoute(string route)
         {
-            return route == PublicRoutesConst.autenticate ||
-                   route == PublicRoutesConst.swaggerData ||
+            return route == PublicRoutesConst.autenticate  ||
+                   route == PublicRoutesConst.swaggerData  ||
+                   route == PublicRoutesConst.swaggerIndex ||
                    route == PublicRoutesConst.swagger;
         }
     }

@@ -45,7 +45,7 @@ namespace PaymentsApi.Services
             };
 
             await _tokenRepository.Create(tokenToCreate);
-
+        
             return tokenToCreate.token;
         }
 
@@ -53,7 +53,7 @@ namespace PaymentsApi.Services
         {
             var savedToken = await _tokenRepository.GetByTokenString(token);
             if (savedToken != null) return true;
-            else return false;
+            return false;
         }
 
         public async Task DeleteToken(string token)
