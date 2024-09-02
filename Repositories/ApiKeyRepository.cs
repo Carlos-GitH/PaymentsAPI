@@ -36,7 +36,7 @@ namespace PaymentsApi.Repositories
 
         public async Task<ApiKeyDTO> GetByApiKey(string apiKey)
         {
-            System.Console.WriteLine($"AAAAAAAAAAAAAAAAAAAAA{apiKey}AAAAAAAAAAAAAAAAAAA");
+            // System.Console.WriteLine($"AAAAAAAAAAAAAAAAAAAAA{apiKey}AAAAAAAAAAAAAAAAAAA");
             var apikey = await _dbContext.ApiKeys.FirstOrDefaultAsync(k => k.api_key == apiKey);
             if (apikey == null) return null;
             return new ApiKeyDTO

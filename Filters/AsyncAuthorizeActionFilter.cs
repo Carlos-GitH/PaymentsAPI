@@ -24,10 +24,12 @@ namespace PaymentsApi.Filters
 
             if (executedContext.Result is ObjectResult result && result.Value is not null)
             {
-                var token = await _tokenService.GenerateAndSaveToken();
+                // var token = await _tokenService.GenerateAndSaveToken();
+                var request = context.HttpContext.Request;
+                var token = request.Headers["auth"].FirstOrDefault();
+                
                 var currentToken = result.Value.GetType().GetProperty("token");
                 currentToken.SetValue(result.Value, token);
-                System.Console.WriteLine("PASSOU AQUI");
             }
         }
     }

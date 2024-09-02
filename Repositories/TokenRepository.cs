@@ -37,5 +37,12 @@ namespace PaymentsApi.Repositories
             _dbContext.Tokens.Remove(tokenToDelete);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateTokenExpirationDate(string token)
+        {
+            var tokenToUpdate = await _dbContext.Tokens.FirstAsync(t => t.token == token);
+            tokenToUpdate.expiration_date = DateTime.Now.AddHours(-3).AddMinutes(30);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

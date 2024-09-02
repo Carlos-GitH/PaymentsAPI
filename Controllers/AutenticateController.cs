@@ -25,21 +25,21 @@ namespace PaymentsApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Autenticate()
+        [Consumes("application/json")]
+        public async Task<IActionResult> Autenticate([FromBody] ApiKeyDTO apiKey)
         {
-            var apiKey = HttpContext.Request.Headers["api_key"];
-            if (apiKey == "") return Unauthorized();
-            var validKey = await _apiKeyRepository.Autenticate(apiKey);
+            if (apiKey is null) return Unauthorized();
+            var validKey = await _apiKeyRepository.Autenticate(apiKey.api_key);
             if (!validKey) return Unauthorized();
             var token = await _tokenService.GenerateAndSaveToken();
             return Ok(token);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            var apiKey = await _apiKeyService.GenerateAndSaveKey();
-            return Ok(apiKey);
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> Create()
+        // {
+        //     var apiKey = await _apiKeyService.GenerateAndSaveKey();
+        //     return Ok(apiKey);
+        // }
     }
 }

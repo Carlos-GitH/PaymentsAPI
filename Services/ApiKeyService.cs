@@ -51,7 +51,8 @@ namespace PaymentsApi.Services
         public async Task<bool> VerifyApiKey(string apiKey)
         {
             var apikey = await _apiKeyRepository.GetByApiKey(apiKey);
-            return apikey != null;
+            if (apikey == null) return false;
+            return true;
         }
     }
 }

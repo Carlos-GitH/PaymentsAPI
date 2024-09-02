@@ -35,7 +35,7 @@ namespace PaymentsApi.Services
             return true;
         }
 
-        public async Task<DebitCardDTO> AdjustBalance(int id, decimal value)
+        public async Task<DebitCardWithTokenDTO> AdjustBalance(int id, decimal value)
         {
             var card = await _debitCardRepository.AdjustBalance(id, value);
             return card;

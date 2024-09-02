@@ -23,6 +23,8 @@ namespace PaymentsApi.Repositories
             var payments = await _dbContext.Payments.ToListAsync();
 
             var paymentsWithToken = new PaymentsWithTokenDTO();
+            paymentsWithToken.payments = new List<PaymentDTO>(); // Initialize the list
+
             foreach(var payment in payments)
             {
                 var paymentDTO = new PaymentDTO
@@ -32,12 +34,12 @@ namespace PaymentsApi.Repositories
                     date        = payment.date,
                     value       = payment.value,
                     status      = payment.status,
-                    card_id     = payment.card_id
+                    card_id     = payment.card_id,
+                    card_type   = payment.card_type
                 };
                 paymentsWithToken.payments.Add(paymentDTO);
             }
             return paymentsWithToken;
-            
         }
 
         public async Task<PaymentWithTokenDTO> GetById(int id)
